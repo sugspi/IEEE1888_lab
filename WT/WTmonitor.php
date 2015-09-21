@@ -316,7 +316,7 @@
           xAxis: {
             categories: hours,
             title:{
-              text: '時間'
+              text: '時刻'
             },
           },
           yAxis: {
@@ -330,7 +330,7 @@
           }]
           },
           tooltip: {
-            valueSuffix: '°'
+            valueSuffix: 'm/s'
           },
           legend: {
             layout: 'vertical',
@@ -359,7 +359,7 @@
           xAxis: {
             categories: hours,
             title:{
-              text: '時間'
+              text: '時刻'
             },
           },
           yAxis: {
@@ -373,7 +373,7 @@
           }]
           },
           tooltip: {
-            valueSuffix: '°'
+            valueSuffix: 'kW'
           },
           legend: {
             layout: 'vertical',
