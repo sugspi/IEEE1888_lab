@@ -35,7 +35,7 @@ int main(void)
 
 
 		fclose(wfp);
-		sleep(1);
+		sleep(3600);
 	}
 
 	fclose(rfp);

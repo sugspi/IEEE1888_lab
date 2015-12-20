@@ -7,9 +7,9 @@
 
 #define MAX_POINT_ID_LEN 1024
 #define MAX_CONTENT_LEN 65536
-#define REGISTER_COUNT 11
+#define REGISTER_COUNT 16
 
-const char *POINT_SET = "http://www.gutp.jp/v1/wt/";
+const char *POINT_SET = "http://www.gutp.jp/hour/pv/";
 
 /* sending date into this struct */
 struct app_data
@@ -24,7 +24,7 @@ struct app_data mydata[REGISTER_COUNT];
 int loadCSV()
 {
 	FILE *fp;
-	char *fname = "WTcsv.csv";
+	char *fname = "PVcsv.csv";
 
 	char time_stmp[100];
 	fp = fopen(fname, "r");
@@ -33,13 +33,15 @@ int loadCSV()
 		return -1;
 	}
 
-	fscanf(fp,"%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%[^,]",
-		mydata[0].value,mydata[1].value,mydata[2].value,mydata[3].value,mydata[4].value,
-		mydata[5].value,mydata[6].value,mydata[7].value,mydata[8].value,mydata[9].value,mydata[10].value);
+	fscanf(fp,"%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%[^,]",
+			mydata[0].value,mydata[1].value,mydata[2].value,mydata[3].value,mydata[4].value,
+			mydata[5].value,mydata[6].value,mydata[7].value,mydata[8].value,mydata[9].value,
+			mydata[10].value,mydata[11].value,mydata[12].value,mydata[13].value,mydata[14].value,mydata[15].value);
 
-	printf("%s %s %s %s %s %s %s %s %s %s %s \n",
+	printf("%s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s\n",
 		mydata[0].value,mydata[1].value,mydata[2].value,mydata[3].value,mydata[4].value,
-		mydata[5].value,mydata[6].value,mydata[7].value,mydata[8].value,mydata[9].value,mydata[10].value);
+		mydata[5].value,mydata[6].value,mydata[7].value,mydata[8].value,mydata[9].value,mydata[10].value,
+		mydata[11].value,mydata[12].value,mydata[13].value,mydata[14].value,mydata[15].value);
 
 	fclose(fp);  
 	return 0;
@@ -57,17 +59,22 @@ int main(int argc, char** argv){
 			strcpy(mydata[i].id,POINT_SET);
 		}
 
-		strcat(mydata[0].id,"vwt");
-		strcat(mydata[1].id,"iwt");
-		strcat(mydata[2].id,"pwt");
-		strcat(mydata[3].id,"qwt");
-		strcat(mydata[4].id,"whwt");
-		strcat(mydata[5].id,"fwt");
-		strcat(mydata[6].id,"pfwt");
-		strcat(mydata[7].id,"wd");
-		strcat(mydata[8].id,"ws");
-		strcat(mydata[9].id,"ewt");
-		strcat(mydata[10].id,"efwt");
+		strcat(mydata[0].id,"vpv");
+		strcat(mydata[1].id,"ipv");
+		strcat(mydata[2].id,"ppv");
+		strcat(mydata[3].id,"qpv");
+		strcat(mydata[4].id,"whpv");
+		strcat(mydata[5].id,"fpv");
+		strcat(mydata[6].id,"pfpv");
+		strcat(mydata[7].id,"irpv");
+		strcat(mydata[8].id,"ptpv");
+		strcat(mydata[9].id,"tpv");
+		strcat(mydata[10].id,"vpdc");
+		strcat(mydata[11].id,"ipdc");
+		strcat(mydata[12].id,"ppdc");
+		strcat(mydata[13].id,"efpv");
+		strcat(mydata[14].id,"efpi");
+		strcat(mydata[15].id,"efpt");
 
 		loadCSV();
 
@@ -77,7 +84,7 @@ int main(int argc, char** argv){
 		request -> body = ieee1888_mk_body();
 
 		ieee1888_pointSet* ps = ieee1888_mk_pointSet_array(1);
-		ps -> id = ieee1888_mk_uri("http://www.gutp.jp/v1/wt/");
+		ps -> id = ieee1888_mk_uri("http://www.gutp.jp/hour/pv/");
 		request -> body -> pointSet = ps;
 		request -> body -> n_pointSet = 1;
 
@@ -100,7 +107,7 @@ int main(int argc, char** argv){
 		ieee1888_dump_objects((ieee1888_object*)request);
 
 		/*connecting with server*/
-		ieee1888_transport* response = ieee1888_client_data(request,"http://192.168.2.140/axis2/services/FIAPStorage",NULL,&err);
+		ieee1888_transport* response = ieee1888_client_data(request,"http://52.27.198.165/axis2/services/FIAPStorage",NULL,&err);
 
 		/*display response message and objects*/
 		ieee1888_dump_objects((ieee1888_object*)response);
@@ -124,7 +131,7 @@ int main(int argc, char** argv){
 			free(response);
 		}
 
-		sleep(60);
+		sleep(36000);
 	}
 
 	return 0;

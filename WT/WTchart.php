@@ -16,20 +16,20 @@ $ago = date(DateTime::ATOM,strtotime("- 24 hours"));
 
 // Generate Stub
 // Specify the IP address of the SDK
-$server = new SoapClient("http://192.168.11.2/axis2/services/FIAPStorage?wsdl"); 
+$server = new SoapClient("http://192.168.2.140/axis2/services/FIAPStorage?wsdl"); 
   
 // Select the Target Data Set
-$key1=array("id"=>"http://www.gutp.jp/dummy/real1",
+$key1=array("id"=>"http://www.gutp.jp/v1/wt/wd",
            "attrName"=>"time",
            "gteq"=>$ago,
            "lt"  =>$now ); 
 
-$key2=array("id"=>"http://www.gutp.jp/dummy/real1",
+$key2=array("id"=>"http://www.gutp.jp/v1/wt/ws",
            "attrName"=>"time",
            "gteq"=>$ago,
            "lt"  =>$now ); 
 
-$key3=array("id"=>"http://www.gutp.jp/dummy/real1",
+$key3=array("id"=>"http://www.gutp.jp/v1/wt/ewt",
            "attrName"=>"time",
            "gteq"=>$ago,
            "lt"  =>$now ); 

@@ -10,17 +10,17 @@ function uuid(){
   
 // Prepare Keys
 $keys = array();
-$keys[0] = array("id"=>"http://www.gutp.jp/dummy/real1", "attrName"=>"time", "select"=>"maximum");
-$keys[1] = array("id"=>"http://www.gutp.jp/dummy/real1", "attrName"=>"time", "select"=>"maximum"); 
-$keys[2] = array("id"=>"http://www.gutp.jp/dummy/real1", "attrName"=>"time", "select"=>"maximum"); 
-$keys[3] = array("id"=>"http://www.gutp.jp/dummy/real1", "attrName"=>"time", "select"=>"maximum"); 
-$keys[4] = array("id"=>"http://www.gutp.jp/dummy/real1", "attrName"=>"time", "select"=>"maximum"); 
-$keys[5] = array("id"=>"http://www.gutp.jp/dummy/real1", "attrName"=>"time", "select"=>"maximum"); 
-$keys[6] = array("id"=>"http://www.gutp.jp/dummy/real1", "attrName"=>"time", "select"=>"maximum"); 
-$keys[7] = array("id"=>"http://www.gutp.jp/dummy/real1", "attrName"=>"time", "select"=>"maximum"); 
-$keys[8] = array("id"=>"http://www.gutp.jp/dummy/real1", "attrName"=>"time", "select"=>"maximum"); 
-$keys[9] = array("id"=>"http://www.gutp.jp/dummy/real1", "attrName"=>"time", "select"=>"maximum"); 
-$keys[10] = array("id"=>"http://www.gutp.jp/dummy/real1", "attrName"=>"time", "select"=>"maximum"); 
+$keys[0] = array("id"=>"http://www.gutp.jp/v1/wt/vwt", "attrName"=>"time", "select"=>"maximum");
+$keys[1] = array("id"=>"http://www.gutp.jp/v1/wt/iwt", "attrName"=>"time", "select"=>"maximum"); 
+$keys[2] = array("id"=>"http://www.gutp.jp/v1/wt/pwt", "attrName"=>"time", "select"=>"maximum"); 
+$keys[3] = array("id"=>"http://www.gutp.jp/v1/wt/qwt", "attrName"=>"time", "select"=>"maximum"); 
+$keys[4] = array("id"=>"http://www.gutp.jp/v1/wt/whwt", "attrName"=>"time", "select"=>"maximum"); 
+$keys[5] = array("id"=>"http://www.gutp.jp/v1/wt/fwt", "attrName"=>"time", "select"=>"maximum"); 
+$keys[6] = array("id"=>"http://www.gutp.jp/v1/wt/pfwt", "attrName"=>"time", "select"=>"maximum"); 
+$keys[7] = array("id"=>"http://www.gutp.jp/v1/wt/wd", "attrName"=>"time", "select"=>"maximum"); 
+$keys[8] = array("id"=>"http://www.gutp.jp/v1/wt/ws", "attrName"=>"time", "select"=>"maximum"); 
+$keys[9] = array("id"=>"http://www.gutp.jp/v1/wt/ewt", "attrName"=>"time", "select"=>"maximum"); 
+$keys[10] = array("id"=>"http://www.gutp.jp/v1/wt/efwt", "attrName"=>"time", "select"=>"maximum"); 
   
 // Generate Query, Header, and Transport for query
 $query=array("type"=>"storage", "id"=>uuid(), "key"=>$keys);
@@ -30,7 +30,7 @@ $queryRQ=array("transport"=>$transport);
   
 // Call an IEEE1888 Storage server
 // Specify the IP address of the SDK.
-$server = new SoapClient("http://192.168.11.2/axis2/services/FIAPStorage?wsdl");
+$server = new SoapClient("http://192.168.2.140/axis2/services/FIAPStorage?wsdl");
 $queryRS = $server->query($queryRQ); 
   
 // Parse IEEE1888 FETCH-Response 1 (Error Handling)
@@ -77,7 +77,7 @@ if(array_key_exists("body",$transport)){
         $time=$value->time;
         $val=$value->_;
 
-        header("Content-type: text/plain; charset=UTF-8");// is here ok?
+        //header("Content-type: text/plain; charset=UTF-8");// is here ok?
         echo $val.",";
             }
        }

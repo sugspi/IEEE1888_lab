@@ -20,7 +20,7 @@ int main(void)
 	while(1){
 
 		if(fscanf(rfp,"%[^,],%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf",
-			time_stmp,&vwt,&iwt,&pwt,&qwt,&whwt,&fwt,&pfwt,&ws,&wd,&ewt,&efwt) == EOF) break;
+		time_stmp,&vwt,&iwt,&pwt,&qwt,&whwt,&fwt,&pfwt,&ws,&wd,&ewt,&efwt) == EOF) break;
 
 		wfp = fopen(wfname,"w");
 		if( wfp == NULL){

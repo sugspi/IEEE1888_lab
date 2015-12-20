@@ -100,7 +100,7 @@
               <table class="table table-striped">
                 <tr>
                   <td>発電効率</td>
-                  <td id="nwt"></td>
+                  <td id="efwt"></td>
                 </tr>
               </table>
             </div>
@@ -160,7 +160,7 @@
                 $('#wd').text(data[7]+"°");
                 $('#ws').text(data[8]+"m/s");
                 $('#ewt').text(data[9]+"kW");
-                $('#nwt').text(data[10]+"%");
+                $('#efwt').text(data[10]+"%");
 
             },
             /**
@@ -174,7 +174,7 @@
               //thisは他のコールバック関数同様にAJAX通信時のオプションを示します。
 
               //エラーメッセージの表示
-              alert('Error : ' + errorThrown);
+              alert('Error1 : ' + errorThrown);
             }
         });
       }
@@ -218,7 +218,7 @@
              */
             success: function(chart_data, dataType)
             {
-              alert("success");
+              alert("success chart");
               chart_data = chart_data.split(",");
               
               var content = new Array();
@@ -252,7 +252,7 @@
               //thisは他のコールバック関数同様にAJAX通信時のオプションを示します。
 
               //エラーメッセージの表示
-              alert('Error : ' + errorThrown);
+              alert('Error2 : ' + errorThrown);
             }
         });
       }
@@ -316,7 +316,7 @@
           xAxis: {
             categories: hours,
             title:{
-              text: '時間'
+              text: '時刻'
             },
           },
           yAxis: {
@@ -330,7 +330,7 @@
           }]
           },
           tooltip: {
-            valueSuffix: '°'
+            valueSuffix: 'm/s'
           },
           legend: {
             layout: 'vertical',
@@ -359,7 +359,7 @@
           xAxis: {
             categories: hours,
             title:{
-              text: '時間'
+              text: '時刻'
             },
           },
           yAxis: {
@@ -373,7 +373,7 @@
           }]
           },
           tooltip: {
-            valueSuffix: '°'
+            valueSuffix: 'kW'
           },
           legend: {
             layout: 'vertical',
@@ -391,8 +391,8 @@
       $(document).ready(function() {
 
         //alert("doc ready");
-        //panelShow();
         chartShow();
+        panelShow();
 
         //setInterval("panelShow()",5000);
         //setInterval("chartShow()",50000);
