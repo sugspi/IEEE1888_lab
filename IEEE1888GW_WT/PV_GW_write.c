@@ -9,7 +9,7 @@
 #define MAX_CONTENT_LEN 65536
 #define REGISTER_COUNT 16
 
-const char *POINT_SET = "http://www.gutp.jp/hour/pv/";
+const char *POINT_SET = "http://www.gutp.jp/v2/pv/";
 
 /* sending date into this struct */
 struct app_data
@@ -84,7 +84,7 @@ int main(int argc, char** argv){
 		request -> body = ieee1888_mk_body();
 
 		ieee1888_pointSet* ps = ieee1888_mk_pointSet_array(1);
-		ps -> id = ieee1888_mk_uri("http://www.gutp.jp/hour/pv/");
+		ps -> id = ieee1888_mk_uri("http://www.gutp.jp/v2/pv/");
 		request -> body -> pointSet = ps;
 		request -> body -> n_pointSet = 1;
 
@@ -131,7 +131,7 @@ int main(int argc, char** argv){
 			free(response);
 		}
 
-		sleep(36000);
+		sleep(3600);
 	}
 
 	return 0;

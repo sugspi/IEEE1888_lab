@@ -9,7 +9,7 @@
 #define MAX_CONTENT_LEN 65536
 #define REGISTER_COUNT 16
 
-const char *POINT_SET = "http://www.gutp.jp/v1/pv/";
+const char *POINT_SET = "http://www.gutp.jp/hour/pv/";
 
 /* sending date into this struct */
 struct app_data
@@ -84,7 +84,7 @@ int main(int argc, char** argv){
 		request -> body = ieee1888_mk_body();
 
 		ieee1888_pointSet* ps = ieee1888_mk_pointSet_array(1);
-		ps -> id = ieee1888_mk_uri("http://www.gutp.jp/v1/pv/");
+		ps -> id = ieee1888_mk_uri("http://www.gutp.jp/hour/pv/");
 		request -> body -> pointSet = ps;
 		request -> body -> n_pointSet = 1;
 
@@ -107,7 +107,7 @@ int main(int argc, char** argv){
 		ieee1888_dump_objects((ieee1888_object*)request);
 
 		/*connecting with server*/
-		ieee1888_transport* response = ieee1888_client_data(request,"http://192.168.2.140/axis2/services/FIAPStorage",NULL,&err);
+		ieee1888_transport* response = ieee1888_client_data(request,"http://52.27.198.165/axis2/services/FIAPStorage",NULL,&err);
 
 		/*display response message and objects*/
 		ieee1888_dump_objects((ieee1888_object*)response);
@@ -131,7 +131,7 @@ int main(int argc, char** argv){
 			free(response);
 		}
 
-		sleep(1);
+		sleep(3600);
 	}
 
 	return 0;
