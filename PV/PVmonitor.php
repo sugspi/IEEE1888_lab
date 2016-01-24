@@ -26,7 +26,7 @@
         </div>
         <!-- main contents -->
         <div class="col-md-10">
-          <h1>this is solar power monitor</h1>
+          <h1>This is solar power monitor</h1>
           <!-- first area -->
           <h2>Eauipment standards</h2>
           <table class="table table-striped">
@@ -140,11 +140,10 @@
       <!-- centering end -->
     </div>
 
-
-  <!-- all js -->
+    <!-- all js -->
     <script>
      function panelShow(){
-        /** PHPから返される結果格納用 */
+        /* PHPから返される結果格納用 */
         var result = null;
         var csv_lis;
 
@@ -199,7 +198,7 @@
               //thisは他のコールバック関数同様にAJAX通信時のオプションを示します。
 
               //エラーメッセージの表示
-              alert('Error : ' + errorThrown);
+              alert('Error <pannel> : ' + errorThrown);
             }
         });
       }
@@ -219,10 +218,10 @@
           }
         }
 
-
-
         //GETメソッドで送るデータを定義します var data = {パラメータ名 : 値};
-        var chart_data = {request : "SEND"}; 
+        var chart_data1 = {request : "SEND"}; 
+        var chart_data2 = {request : "SEND"}; 
+        var chart_data3 = {request : "SEND"};
         /**
         * Ajax通信メソッド
         * @param type  : HTTP通信の種類
@@ -230,41 +229,24 @@
         * @param data  : サーバに送信する値
         */
 
-        //alert("before ajax");
-
         $.ajax({
             type: "POST",
-            url: "PVchart.php",
-            data: chart_data,
+            url: "PVchart_key1_test.php",
+            data: chart_data1,
             dataType: "text",
             
             /**
              * Ajax通信が成功した場合に呼び出されるメソッド
              */
-            success: function(chart_data, dataType)
+            success: function(chart_data1, dataType)
             {
-              alert("success");
-              chart_data = chart_data.split(",");
-              
-              var content = new Array();
-              var c = 0;
-              var j = 0;
-              for(i=0; i<chart_data.length-1; i++){
-                if(chart_data[i] == 'e'){
-                  //alert("e"+c);;
-                  j=0;
-                  if(c==0) {TPVchartShow(content, hours); c++;}else{
-                    if(c==1){IRPVchartShow(content, hours); c++;}else{
-                      if(c==2){PPDCchartShow(content,hours); c++;}
-                    }
-                  }
-                  content.length = 0;
-                  continue;
-                }
-                
-                content[j] = Number(chart_data[i]);
-                j++;
+              chart_data1 = chart_data1.split(",");
+
+              var content1 = new Array();
+              for(k=0; k<24; k++){
+                content1[k] = Number(chart_data1[k]);
               }
+              TPVchartShow(content1,hours)
             },
             /**
              * Ajax通信が失敗した場合に呼び出されるメソッド
@@ -277,14 +259,83 @@
               //thisは他のコールバック関数同様にAJAX通信時のオプションを示します。
 
               //エラーメッセージの表示
-              alert('Error : ' + errorThrown);
+              alert('Error <key1> : ' + errorThrown);
+            }
+        });
+
+        $.ajax({
+            type: "POST",
+            url: "PVchart_key2_test.php",
+            data: chart_data2,
+            dataType: "text",
+            
+            /**
+             * Ajax通信が成功した場合に呼び出されるメソッド
+             */
+            success: function(chart_data2, dataType)
+            {
+              chart_data2 = chart_data2.split(",");
+
+              //if(c==0) {TPVchartShow(content, hours); c++;}else{
+              //if(c==1){IRPVchartShow(content, hours); c++;}else{
+              //if(c==2){PPDCchartShow(content,hours); c++;}
+              var content2 = new Array();
+              for(k=0; k<24; k++){
+                content2[k] = Number(chart_data2[k]);
+              }
+              IRPVchartShow(content2,hours)
+            },
+            /**
+             * Ajax通信が失敗した場合に呼び出されるメソッド
+             */
+            error: function(XMLHttpRequest, textStatus, errorThrown)
+            {
+              //通常はここでtextStatusやerrorThrownの値を見て処理を切り分けるか、単純に通信に失敗した際の処理を記述します。
+
+              this;
+              //thisは他のコールバック関数同様にAJAX通信時のオプションを示します。
+
+              //エラーメッセージの表示
+              alert('Error <key2> : ' + errorThrown);
+            }
+        });
+
+        $.ajax({
+            type: "POST",
+            url: "PVchart_key3_test.php",
+            data: chart_data3,
+            dataType: "text",
+            
+            /**
+             * Ajax通信が成功した場合に呼び出されるメソッド
+             */
+            success: function(chart_data3, dataType)
+            {
+              chart_data3 = chart_data3.split(",");
+
+              var content3 = new Array();
+              for(k=0; k<24; k++){
+                content3[k] = Number(chart_data3[k]);
+              }
+              PPDCchartShow(content3,hours)
+            },
+            /**
+             * Ajax通信が失敗した場合に呼び出されるメソッド
+             */
+            error: function(XMLHttpRequest, textStatus, errorThrown)
+            {
+              //通常はここでtextStatusやerrorThrownの値を見て処理を切り分けるか、単純に通信に失敗した際の処理を記述します。
+
+              this;
+              //thisは他のコールバック関数同様にAJAX通信時のオプションを示します。
+
+              //エラーメッセージの表示
+              alert('Error <key3> : ' + errorThrown);
             }
         });
       }
 
       function  TPVchartShow(content, hours){
-        //alert("WD");
-        //console.log(content);
          $('#TPVchart').highcharts({
           title: {
             text: 'Hourly Templature',
@@ -326,10 +377,8 @@
         });       
       } 
 
-      function  PTPVchartShow(content, hours){
-        //alert("ws");
-        //console.log(content);
-         $('#PTPVchart').highcharts({
+      function  IRPVchartShow(content, hours){
+          $('#IRPVchart').highcharts({
           title: {
             text: 'Hourly Amount of Solar Radiation',
             x: -20 //center
@@ -371,7 +420,6 @@
       } 
 
       function  PPDCchartShow(content, hours){
-        //alert("ewt");
          $('#PPDCchart').highcharts({
           title: {
             text: 'Hourly Generated energy',
@@ -416,7 +464,7 @@
       $(document).ready(function() {
 
         //alert("doc ready");
-        //panelShow();
+        panelShow();
         chartShow();
 
         //setInterval("panelShow()",5000);

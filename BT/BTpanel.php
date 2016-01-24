@@ -31,7 +31,7 @@ $queryRQ=array("transport"=>$transport);
   
 // Call an IEEE1888 Storage server
 // Specify the IP address of the SDK.
-$server = new SoapClient("http://192.168.2.140/axis2/services/FIAPStorage?wsdl");
+$server = new SoapClient("http://52.27.198.165/axis2/services/FIAPStorage?wsdl");
 $queryRS = $server->query($queryRQ); 
   
 // Parse IEEE1888 FETCH-Response 1 (Error Handling)

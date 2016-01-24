@@ -1,7 +1,7 @@
 <?php 
 // UUID Generator
 function uuid(){
-    return sprintf('%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
+  return sprintf('%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
     mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff), mt_rand( 0, 0xffff ),
     mt_rand( 0, 0x0fff ) | 0x4000,
     mt_rand( 0, 0x3fff ) | 0x8000,
@@ -39,7 +39,7 @@ for($t=24; $t>0; $t--){
     if($t>8){
       $start = "2016-01-21T0$box1:00:00+09:00";
     }else{
-      $start = "1916-01-21T$box1:00:00+09:00";
+      $start = "2016-01-21T$box1:00:00+09:00";
     }
 
     if($t>9){
@@ -60,20 +60,20 @@ for($t=24; $t>0; $t--){
   echo "end is $end\n\n\n";*/
 
   // Select the Target Data Set
- $key1 = array("id"=>"http://www.gutp.jp/v2/wt/wd",
+ /*$key1 = array("id"=>"http://www.gutp.jp/hour/wt/wd",
              "attrName"=>"time",
              "gteq"=>$start,
              "lt"  =>$end ); 
 
-  /*$key1=array("id"=>"http://www.gutp.jp/hour/wt/ws",
-             "attrName"=>"time",
-             "gteq"=>$start,
-             "lt"  =>$end ); 
-
-  $key1=array("id"=>"http://www.gutp.jp/hour/wt/ewt",
+  $key1=array("id"=>"http://www.gutp.jp/hour/wt/ws",
              "attrName"=>"time",
              "gteq"=>$start,
              "lt"  =>$end ); */
+
+  $key1=array("id"=>"http://www.gutp.jp/v2/bt/ibdc",
+             "attrName"=>"time",
+             "gteq"=>$start,
+             "lt"  =>$end ); 
    
   // Iteratively Retrieve Data and Print Out by FETCH protocol 
   $cursor = NULL;

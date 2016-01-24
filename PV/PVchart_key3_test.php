@@ -1,7 +1,7 @@
 <?php 
 // UUID Generator
 function uuid(){
-    return sprintf('%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
+  return sprintf('%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
     mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff), mt_rand( 0, 0xffff ),
     mt_rand( 0, 0x0fff ) | 0x4000,
     mt_rand( 0, 0x3fff ) | 0x8000,
@@ -10,7 +10,7 @@ function uuid(){
 
 // Generate Stub
 // Specify the IP address of the SDK
-$server = new SoapClient("http://52.27.198.165/axis2/services/FIAPStorage?wsdl"); 
+$server = new SoapClient("http://localhost/axis2/services/FIAPStorage?wsdl"); 
 $var = array();
 
 for($t=24; $t>0; $t--){
@@ -28,8 +28,8 @@ for($t=24; $t>0; $t--){
     $box1 = intval(42-$t);
     $box2 = intval(43-$t);
 
-    $start = "2016-01-20T$box1:00:00+09:00";
-    $end = "2016-01-20T$box2:00:00+09:00";
+    $start = "2015-11-09T$box1:00:00+09:00";
+    $end = "2015-11-09T$box2:00:00+09:00";
     
   }else{
 
@@ -37,21 +37,21 @@ for($t=24; $t>0; $t--){
     $box2 = intval(19-$t);
 
     if($t>8){
-      $start = "2016-01-21T0$box1:00:00+09:00";
+      $start = "2015-11-10T0$box1:00:00+09:00";
     }else{
-      $start = "1916-01-21T$box1:00:00+09:00";
+      $start = "2015-11-10T$box1:00:00+09:00";
     }
 
     if($t>9){
-      $end = "2016-01-21T0$box2:00:00+09:00";
+      $end = "2015-11-10T0$box2:00:00+09:00";
     }else{
-      $end = "2016-01-21T$box2:00:00+09:00";
+      $end = "2015-11-10T$box2:00:00+09:00";
     }
   }
 
   if($t==19){
-    $start = "2016-01-20T23:00:00+09:00";
-    $end = "2016-01-21T00:00:00+09:00";
+    $start = "2015-11-09T23:00:00+09:00";
+    $end = "2015-11-10T00:00:00+09:00";
   }
 
 
@@ -60,20 +60,21 @@ for($t=24; $t>0; $t--){
   echo "end is $end\n\n\n";*/
 
   // Select the Target Data Set
- $key1 = array("id"=>"http://www.gutp.jp/v2/wt/wd",
-             "attrName"=>"time",
-             "gteq"=>$start,
-             "lt"  =>$end ); 
+// Select the Target Data Set
+/*$key1=array("id"=>"http://www.gutp.jp/hour/pv/tpv",
+           "attrName"=>"time",
+           "gteq"=>$start,
+           "lt"  =>$end ); 
 
-  /*$key1=array("id"=>"http://www.gutp.jp/hour/wt/ws",
-             "attrName"=>"time",
-             "gteq"=>$start,
-             "lt"  =>$end ); 
+$key1=array("id"=>"http://www.gutp.jp/hour/pv/irpv",
+           "attrName"=>"time",
+           "gteq"=>$start,
+           "lt"  =>$end ); */
 
-  $key1=array("id"=>"http://www.gutp.jp/hour/wt/ewt",
-             "attrName"=>"time",
-             "gteq"=>$start,
-             "lt"  =>$end ); */
+$key1=array("id"=>"http://www.gutp.jp/hour/pv/ppdc",
+           "attrName"=>"time",
+           "gteq"=>$start,
+           "lt"  =>$end );
    
   // Iteratively Retrieve Data and Print Out by FETCH protocol 
   $cursor = NULL;

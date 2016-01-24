@@ -320,10 +320,10 @@
           }
         }
 
-
-
         //GETメソッドで送るデータを定義します var data = {パラメータ名 : 値};
-        var chart_data = {request : "SEND"}; 
+        var chart_data1 = {request : "SEND"}; 
+        var chart_data2 = {request : "SEND"}; 
+        var chart_data3 = {request : "SEND"}; 
         /**
         * Ajax通信メソッド
         * @param type  : HTTP通信の種類
@@ -335,37 +335,21 @@
 
         $.ajax({
             type: "POST",
-            url: "GEchart.php",
-            data: chart_data,
+            url: "GEchart_key1_test.php",
+            data: chart_data1,
             dataType: "text",
-            
-            /**
-             * Ajax通信が成功した場合に呼び出されるメソッド
-             */
-            success: function(chart_data, dataType)
+
+            success: function(chart_data1, dataType)
             {
-              alert("success");
-              chart_data = chart_data.split(",");
+              chart_data1 = chart_data1.split(",");
+              console.log(chart_data1);
               
-              var content = new Array();
-              var c = 0;
-              var j = 0;
-              for(i=0; i<chart_data.length-1; i++){
-                if(chart_data[i] == 'e'){
-                  //alert("e"+c);;
-                  j=0;
-                  if(c==0) {QGASchartShow(content, hours); c++;}else{
-                    if(c==1){PVSchartShow(content, hours); c++;}else{
-                      if(c==2){QGE2chartShow(content,hours); c++;}
-                    }
-                  }
-                  content.length = 0;
-                  continue;
-                }
-                
-                content[j] = Number(chart_data[i]);
-                j++;
+              var content1 = new Array();
+              for(k=0; k<24; k++){
+                content1[k] = Number(chart_data1[k]);
               }
+              
+               QGASchartShow(content1, hours);
             },
             /**
              * Ajax通信が失敗した場合に呼び出されるメソッド
@@ -373,12 +357,84 @@
             error: function(XMLHttpRequest, textStatus, errorThrown)
             {
               //通常はここでtextStatusやerrorThrownの値を見て処理を切り分けるか、単純に通信に失敗した際の処理を記述します。
-
               this;
               //thisは他のコールバック関数同様にAJAX通信時のオプションを示します。
-
               //エラーメッセージの表示
-              alert('Error : ' + errorThrown);
+              alert('Error2 : ' + errorThrown);
+            }
+        });
+
+       $.ajax({
+            type: "POST",
+            url: "GEchart_key2_test.php",
+            data: chart_data2,
+            dataType: "text",
+            
+            /*
+             * Ajax通信が成功した場合に呼び出されるメソッド
+             */
+
+            success: function(chart_data2, dataType)
+            {
+              alert("success chart "+i);
+              chart_data2 = chart_data2.split(",");
+              
+              var content2 = new Array();
+              for(k=0; k<24; k++){
+                content2[k] = Number(chart_data2[k]);
+              }
+              
+              PVSchartShow(content2, hours);
+
+            },
+            /**
+             * Ajax通信が失敗した場合に呼び出されるメソッド
+             */
+            
+            error: function(XMLHttpRequest, textStatus, errorThrown)
+            {
+              //通常はここでtextStatusやerrorThrownの値を見て処理を切り分けるか、単純に通信に失敗した際の処理を記述します。
+              this;
+              //thisは他のコールバック関数同様にAJAX通信時のオプションを示します。
+              //エラーメッセージの表示
+              alert('Error2 : ' + errorThrown);
+            }
+        });
+
+        $.ajax({
+            type: "POST",
+            url: "GEchart_key3_test.php",
+            data: chart_data3,
+            dataType: "text",
+            
+            /**
+             * Ajax通信が成功した場合に呼び出されるメソッド
+             */
+            
+            success: function(chart_data3, dataType)
+            {
+              alert("success chart "+i);
+              chart_data3 = chart_data3.split(",");
+              
+              var content3 = new Array();
+              for(k=0; k<24; k++){
+                content3[k] = Number(chart_data3[k]);
+              }
+              
+              QGE2chartShow(content3,hours);
+
+            },
+            /**
+             * Ajax通信が失敗した場合に呼び出されるメソッド
+             */
+            
+            error: function(XMLHttpRequest, textStatus, errorThrown)
+            {
+              //通常はここでtextStatusやerrorThrownの値を見て処理を切り分けるか、単純に通信に失敗した際の処理を記述します。
+              this;
+              //thisは他のコールバック関数同様にAJAX通信時のオプションを示します。
+              //エラーメッセージの表示
+              alert('Error2 : ' + errorThrown);
             }
         });
       }

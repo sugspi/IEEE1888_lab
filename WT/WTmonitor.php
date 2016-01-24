@@ -314,15 +314,19 @@
       }
 
       function  WDchartShow(content, hours){
-        //alert("WD");
         console.log(content);
          $('#WDchart').highcharts({
-          title: {
+          
+          chart:{
+           type:'scatter',
+           zoomType:'xy'
+          },
+	  title: {
             text: 'Hourly Wind Direction',
             x: -20 //center
           },
           subtitle: {
-            text: 'test program',
+            text: 'N:360°,W:270°,S:180°,E:90°,N:0°',
             x: -20
           },
           xAxis: {

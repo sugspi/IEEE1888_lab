@@ -1,7 +1,7 @@
 <?php 
 // UUID Generator
 function uuid(){
-    return sprintf('%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
+  return sprintf('%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
     mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff), mt_rand( 0, 0xffff ),
     mt_rand( 0, 0x0fff ) | 0x4000,
     mt_rand( 0, 0x3fff ) | 0x8000,
@@ -13,64 +13,27 @@ function uuid(){
 $server = new SoapClient("http://52.27.198.165/axis2/services/FIAPStorage?wsdl"); 
 $var = array();
 
-for($t=24; $t>0; $t--){
+for($t=25; $t>0; $t--){
   
-  /* select range of point priod.
+  // select range of point priod.
   $s_start = strval($t*(-1))." hours"; 
   $s_end = strval(($t*(-1))+1)." hours";
 
   $start = date(DateTime::ATOM,strtotime($s_start));
-  $end = date(DateTime::ATOM,strtotime($s_end));*/
-
-
-  if($t>18)
-  {
-    $box1 = intval(42-$t);
-    $box2 = intval(43-$t);
-
-    $start = "2016-01-20T$box1:00:00+09:00";
-    $end = "2016-01-20T$box2:00:00+09:00";
-    
-  }else{
-
-    $box1 = intval(18-$t);
-    $box2 = intval(19-$t);
-
-    if($t>8){
-      $start = "2016-01-21T0$box1:00:00+09:00";
-    }else{
-      $start = "1916-01-21T$box1:00:00+09:00";
-    }
-
-    if($t>9){
-      $end = "2016-01-21T0$box2:00:00+09:00";
-    }else{
-      $end = "2016-01-21T$box2:00:00+09:00";
-    }
-  }
-
-  if($t==19){
-    $start = "2016-01-20T23:00:00+09:00";
-    $end = "2016-01-21T00:00:00+09:00";
-  }
-
-
-  /*echo "24 - t is $t\n";
-  echo "start is $start\n";
-  echo "end is $end\n\n\n";*/
+  $end = date(DateTime::ATOM,strtotime($s_end));
 
   // Select the Target Data Set
- $key1 = array("id"=>"http://www.gutp.jp/v2/wt/wd",
+  /*$key1 = array("id"=>"http://www.gutp.jp/v1/wt/wd",
+             "attrName"=>"time",
+             "gteq"=>$start,
+             "lt"  =>$end ); */
+
+  $key1=array("id"=>"http://www.gutp.jp/v2/bt/vbdc",
              "attrName"=>"time",
              "gteq"=>$start,
              "lt"  =>$end ); 
 
-  /*$key1=array("id"=>"http://www.gutp.jp/hour/wt/ws",
-             "attrName"=>"time",
-             "gteq"=>$start,
-             "lt"  =>$end ); 
-
-  $key1=array("id"=>"http://www.gutp.jp/hour/wt/ewt",
+  /*$key1=array("id"=>"http://www.gutp.jp/v1/wt/ewt",
              "attrName"=>"time",
              "gteq"=>$start,
              "lt"  =>$end ); */
@@ -124,9 +87,7 @@ for($t=24; $t>0; $t--){
           }
 
           if(intval(count($value))!=1000){
-            $var[24-$t] = sprintf('%.3f',($tmp/$data_size));
-            $dump = $var[24-$t];
-            //echo "$dump\n";
+            $var[25-$t] = sprintf('%.3f',($tmp/$data_size));
           }
         }
       }
@@ -144,7 +105,7 @@ for($t=24; $t>0; $t--){
   }while($cursor!=NULL); 
 }
 
-  for($i=0; $i<24; $i++){
+  for($i=0; $i<=23; $i++){
     echo"$var[$i],";
   }
 

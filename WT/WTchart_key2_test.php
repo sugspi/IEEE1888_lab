@@ -10,7 +10,7 @@ function uuid(){
 
 // Generate Stub
 // Specify the IP address of the SDK
-$server = new SoapClient("http://192.168.2.140/axis2/services/FIAPStorage?wsdl"); 
+$server = new SoapClient("http://52.27.198.165/axis2/services/FIAPStorage?wsdl"); 
 $var = array();
 
 for($t=24; $t>0; $t--){
@@ -28,8 +28,8 @@ for($t=24; $t>0; $t--){
     $box1 = intval(42-$t);
     $box2 = intval(43-$t);
 
-    $start = "2015-09-26T$box1:00:00+09:00";
-    $end = "2015-09-26T$box2:00:00+09:00";
+    $start = "2016-01-20T$box1:00:00+09:00";
+    $end = "2016-01-20T$box2:00:00+09:00";
     
   }else{
 
@@ -37,21 +37,21 @@ for($t=24; $t>0; $t--){
     $box2 = intval(19-$t);
 
     if($t>8){
-      $start = "2015-09-27T0$box1:00:00+09:00";
+      $start = "2016-01-21T0$box1:00:00+09:00";
     }else{
-      $start = "2015-09-27T$box1:00:00+09:00";
+      $start = "2016-01-21T$box1:00:00+09:00";
     }
 
     if($t>9){
-      $end = "2015-09-27T0$box2:00:00+09:00";
+      $end = "2016-01-21T0$box2:00:00+09:00";
     }else{
-      $end = "2015-09-27T$box2:00:00+09:00";
+      $end = "2016-01-21T$box2:00:00+09:00";
     }
   }
 
   if($t==19){
-    $start = "2015-09-26T23:00:00+09:00";
-    $end = "2015-09-27T00:00:00+09:00";
+    $start = "2016-01-20T23:00:00+09:00";
+    $end = "2016-01-21T00:00:00+09:00";
   }
 
 
@@ -60,17 +60,17 @@ for($t=24; $t>0; $t--){
   echo "end is $end\n\n\n";*/
 
   // Select the Target Data Set
- /*$key1 = array("id"=>"http://www.gutp.jp/v1/wt/wd",
+ /*$key1 = array("id"=>"http://www.gutp.jp/hour/wt/wd",
              "attrName"=>"time",
              "gteq"=>$start,
              "lt"  =>$end ); */
 
-  $key1=array("id"=>"http://www.gutp.jp/v1/wt/ws",
+  $key1=array("id"=>"http://www.gutp.jp/v2/wt/ws",
              "attrName"=>"time",
              "gteq"=>$start,
              "lt"  =>$end ); 
 
-  /*$key1=array("id"=>"http://www.gutp.jp/v1/wt/ewt",
+  /*$key1=array("id"=>"http://www.gutp.jp/hour/wt/ewt",
              "attrName"=>"time",
              "gteq"=>$start,
              "lt"  =>$end ); */

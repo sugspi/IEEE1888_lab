@@ -60,7 +60,7 @@ for($t=24; $t>0; $t--){
   echo "end is $end\n\n\n";*/
 
   // Select the Target Data Set
- $key1 = array("id"=>"http://www.gutp.jp/v2/wt/wd",
+ $key1 = array("id"=>"http://www.gutp.jp/v2/bt/pdbc",
              "attrName"=>"time",
              "gteq"=>$start,
              "lt"  =>$end ); 

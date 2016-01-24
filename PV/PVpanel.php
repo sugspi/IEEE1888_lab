@@ -10,22 +10,22 @@ function uuid(){
   
 // Prepare Keys
 $keys = array();
-$keys[0] = array("id"=>"http://www.gutp.jp/v1/pv/vpv", "attrName"=>"time", "select"=>"maximum");
-$keys[1] = array("id"=>"http://www.gutp.jp/v1/pv/ipv", "attrName"=>"time", "select"=>"maximum"); 
-$keys[2] = array("id"=>"http://www.gutp.jp/v1/pv/ppv", "attrName"=>"time", "select"=>"maximum"); 
-$keys[3] = array("id"=>"http://www.gutp.jp/v1/pv/qpv", "attrName"=>"time", "select"=>"maximum"); 
-$keys[4] = array("id"=>"http://www.gutp.jp/v1/pv/whpv", "attrName"=>"time", "select"=>"maximum"); 
-$keys[5] = array("id"=>"http://www.gutp.jp/v1/pv/fpv", "attrName"=>"time", "select"=>"maximum"); 
-$keys[6] = array("id"=>"http://www.gutp.jp/v1/pv/pfpv", "attrName"=>"time", "select"=>"maximum"); 
-$keys[7] = array("id"=>"http://www.gutp.jp/v1/pv/irpv", "attrName"=>"time", "select"=>"maximum"); 
-$keys[8] = array("id"=>"http://www.gutp.jp/v1/pv/ptpv", "attrName"=>"time", "select"=>"maximum"); 
-$keys[9] = array("id"=>"http://www.gutp.jp/v1/pv/tpv", "attrName"=>"time", "select"=>"maximum"); 
-$keys[10] = array("id"=>"http://www.gutp.jp/v1/pv/vpdc", "attrName"=>"time", "select"=>"maximum"); 
-$keys[11] = array("id"=>"http://www.gutp.jp/v1/pv/ipdc", "attrName"=>"time", "select"=>"maximum"); 
-$keys[12] = array("id"=>"http://www.gutp.jp/v1/pv/ppdc", "attrName"=>"time", "select"=>"maximum"); 
-$keys[13] = array("id"=>"http://www.gutp.jp/v1/pv/efpv", "attrName"=>"time", "select"=>"maximum"); 
-$keys[14] = array("id"=>"http://www.gutp.jp/v1/pv/efpp", "attrName"=>"time", "select"=>"maximum"); 
-$keys[15] = array("id"=>"http://www.gutp.jp/v1/pv/efpi", "attrName"=>"time", "select"=>"maximum"); 
+$keys[0] = array("id"=>"http://www.gutp.jp/hour/pv/vpv", "attrName"=>"time", "select"=>"maximum");
+$keys[1] = array("id"=>"http://www.gutp.jp/hour/pv/ipv", "attrName"=>"time", "select"=>"maximum"); 
+$keys[2] = array("id"=>"http://www.gutp.jp/hour/pv/ppv", "attrName"=>"time", "select"=>"maximum"); 
+$keys[3] = array("id"=>"http://www.gutp.jp/hour/pv/qpv", "attrName"=>"time", "select"=>"maximum"); 
+$keys[4] = array("id"=>"http://www.gutp.jp/hour/pv/whpv", "attrName"=>"time", "select"=>"maximum"); 
+$keys[5] = array("id"=>"http://www.gutp.jp/hour/pv/fpv", "attrName"=>"time", "select"=>"maximum"); 
+$keys[6] = array("id"=>"http://www.gutp.jp/hour/pv/pfpv", "attrName"=>"time", "select"=>"maximum"); 
+$keys[7] = array("id"=>"http://www.gutp.jp/hour/pv/irpv", "attrName"=>"time", "select"=>"maximum"); 
+$keys[8] = array("id"=>"http://www.gutp.jp/hour/pv/ptpv", "attrName"=>"time", "select"=>"maximum"); 
+$keys[9] = array("id"=>"http://www.gutp.jp/hour/pv/tpv", "attrName"=>"time", "select"=>"maximum"); 
+$keys[10] = array("id"=>"http://www.gutp.jp/hour/pv/vpdc", "attrName"=>"time", "select"=>"maximum"); 
+$keys[11] = array("id"=>"http://www.gutp.jp/hour/pv/ipdc", "attrName"=>"time", "select"=>"maximum"); 
+$keys[12] = array("id"=>"http://www.gutp.jp/hour/pv/ppdc", "attrName"=>"time", "select"=>"maximum"); 
+$keys[13] = array("id"=>"http://www.gutp.jp/hour/pv/efpv", "attrName"=>"time", "select"=>"maximum"); 
+$keys[14] = array("id"=>"http://www.gutp.jp/hour/pv/efpi", "attrName"=>"time", "select"=>"maximum"); 
+$keys[15] = array("id"=>"http://www.gutp.jp/hour/pv/efpt", "attrName"=>"time", "select"=>"maximum"); 
   
 // Generate Query, Header, and Transport for query
 $query=array("type"=>"storage", "id"=>uuid(), "key"=>$keys);
@@ -35,7 +35,7 @@ $queryRQ=array("transport"=>$transport);
   
 // Call an IEEE1888 Storage server
 // Specify the IP address of the SDK.
-$server = new SoapClient("http://192.168.2.140/axis2/services/FIAPStorage?wsdl");
+$server = new SoapClient("http://localhost/axis2/services/FIAPStorage?wsdl");
 $queryRS = $server->query($queryRQ); 
   
 // Parse IEEE1888 FETCH-Response 1 (Error Handling)
@@ -82,7 +82,7 @@ if(array_key_exists("body",$transport)){
         $time=$value->time;
         $val=$value->_;
 
-        header("Content-type: text/plain; charset=UTF-8");// is here ok?
+        //header("Content-type: text/plain; charset=UTF-8");
         echo $val.",";
             }
        }
